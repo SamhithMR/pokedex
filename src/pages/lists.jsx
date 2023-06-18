@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import fetchData from '../hooks/FetchData';
 import { useParams } from "react-router-dom";
-import { CardSkeleton } from "../components/Skeleton";
+import { CardSkeletons } from "../components/Skeleton";
 import Card from '../components/Card';
 import { MultiSelect } from "react-multi-select-component";
 import './search.css';
@@ -26,8 +26,7 @@ function Search() {
   const options = useSelector((state) => state.home.ability);
   const typesOptions = useSelector((state) => state.home.types);
   const speciesOptions = useSelector((state) => state.home.species);
-  
- 
+
   useEffect(() => {
     if (!pokelistsLoading && pokelists) {
       const filteredList = pokelists.results.filter((pokemon) => pokemon.name.includes(name));
@@ -127,12 +126,12 @@ function Search() {
           dataLength={loadedCardCount}
           next={loadMoreCards}
           hasMore={true}
-          loader={<CardSkeleton />}
+          loader={<CardSkeletons />}
           className="infinite-scroll"
         ></InfiniteScroll>
       )}
-      {pokelistsLoading && <div className="loader">Loading...</div>}
-      {items.length <= 0  && <div className="resultNotFound">Sorry, no results found</div>}
+      {pokelistsLoading && <div className="resultNotFound">Loading...</div>}
+      {!pokelistsLoading && items.length <= 0  && <div className="resultNotFound">Sorry, no results found</div>}
     </div>
   );
 
