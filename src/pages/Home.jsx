@@ -20,14 +20,20 @@ function Home(){
       
     
     return (
-    <div className="banner">
-        {(loading || err) ? <BannerSkeleton/> : <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${image}.png`} alt="Banner image" />}
+            <div className="banner">
+            {(loading || err) ? 
+                <img src={`../assets/noPokemon.png`}/>
+                : 
+                <img 
+                    src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${image}.png`} 
+                />
+                }
         <div className="mask"></div>
         <div className="banner_contents">
             <h2>welcome.</h2>
             <p>search your pokemon</p>
             <form className="input_feild" onSubmit={(e) => {e.preventDefault();navigate(`/lists/${value}`); setValue("")}}>
-                <input placeholder=" type your pokemon" value={value} onChange={(e) => (setValue(e.target.value))}></input>
+                <input placeholder=" type your pokemon" value={value} onChange={(e) => (setValue(e.target.value.toLowerCase()))}></input>
                 <button type="submit">search</button>
             </form>
         </div>
