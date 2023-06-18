@@ -131,7 +131,7 @@ function Search() {
         ></InfiniteScroll>
       )}
       {pokelistsLoading && <div className="resultNotFound">Loading...</div>}
-      {!pokelistsLoading && items.length <= 0  && <div className="resultNotFound">Sorry, no results found</div>}
+      {pokelistsLoading && items.length <= 0  && <div className="resultNotFound">Sorry, no results found</div>}
     </div>
   );
 
