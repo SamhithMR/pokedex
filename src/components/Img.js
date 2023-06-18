@@ -2,7 +2,7 @@ import LazyLoad from "react-lazy-load"
 import noPoster from '../assets/no-poster.png'
 import React, { useState } from "react";
 import {ImgSkeleton} from './Skeleton'
-
+import noPokemonImage from "../assets/noPokemon.png";
 
 function Img({ url }) {
   const [imageError, setImageError] = useState(false);
@@ -18,18 +18,15 @@ function Img({ url }) {
   };
 
   return (
-    <div style={{ position: "relative", display:'flex', justifyContent:'center'}}>
-      {isLoading && <ImgSkeleton style={{ position: "absolute", top: 0, left: 0, }} />}
+    <div style={{ position: "relative", display: "flex", justifyContent: "center" }}>
+      {isLoading && (
+        <img src={noPokemonImage} alt="Loading..." style={{ position: "absolute", top: 0, left: 0 }} />
+      )}
       {imageError ? (
-        <img src={noPoster} alt="No poster available" />
+        <img src={noPokemonImage} alt="No poster available" />
       ) : (
-        <img
-          src={url}
-          onLoad={handleImageLoad}
-          onError={handleImageError}
-        />
-      )
-      }
+        <img src={url} onLoad={handleImageLoad} onError={handleImageError} />
+      )}
     </div>
   );
 }
